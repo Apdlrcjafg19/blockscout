@@ -83,10 +83,10 @@ defmodule Explorer.Chain do
 
   alias Explorer.Counters.{
     AddressesCounter,
-    AddressTransactionsCounter,
-    AddressTransactionsGasUsageCounter,
+    AddressesWithBalanceCounter,
     AddressTokenTransfersCounter,
-    AddressesWithBalanceCounter
+    AddressTransactionsCounter,
+    AddressTransactionsGasUsageCounter
   }
 
   alias Explorer.Market.MarketHistoryCache

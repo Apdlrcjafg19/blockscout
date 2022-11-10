@@ -5,11 +5,11 @@ defmodule BlockScoutWeb.API.V2.SearchControllerTest do
 
   setup do
     insert(:block)
-    insert(:smart_contract)
-    insert(:token)
+    insert(:unique_smart_contract)
+    insert(:unique_token)
     insert(:transaction)
     address = insert(:address)
-    insert(:address_name, address: address)
+    insert(:unique_address_name, address: address)
 
     :ok
   end
@@ -47,7 +47,7 @@ defmodule BlockScoutWeb.API.V2.SearchControllerTest do
 
     test "search address", %{conn: conn} do
       address = insert(:address)
-      name = insert(:address_name, address: address)
+      name = insert(:unique_address_name, address: address)
 
       request = get(conn, "/api/v2/search?q=#{address.hash}")
       assert response = json_response(request, 200)
@@ -64,7 +64,7 @@ defmodule BlockScoutWeb.API.V2.SearchControllerTest do
     end
 
     test "search contract", %{conn: conn} do
-      contract = insert(:smart_contract)
+      contract = insert(:unique_smart_contract)
 
       request = get(conn, "/api/v2/search?q=#{contract.name}")
       assert response = json_response(request, 200)
@@ -110,7 +110,7 @@ defmodule BlockScoutWeb.API.V2.SearchControllerTest do
     end
 
     test "search token", %{conn: conn} do
-      token = insert(:token)
+      token = insert(:unique_token)
 
       request = get(conn, "/api/v2/search?q=#{token.name}")
       assert response = json_response(request, 200)

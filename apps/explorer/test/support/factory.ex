@@ -166,6 +166,13 @@ defmodule Explorer.Factory do
   def address_name_factory do
     %Address.Name{
       address: build(:address),
+      name: "FooContract"
+    }
+  end
+
+  def unique_address_name_factory do
+    %Address.Name{
+      address: build(:address),
       name: sequence("FooContract")
     }
   end
@@ -217,7 +224,7 @@ defmodule Explorer.Factory do
         "0x6080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806360fe47b114604e5780636d4ce63c146078575b600080fd5b348015605957600080fd5b5060766004803603810190808035906020019092919050505060a0565b005b348015608357600080fd5b50608a60aa565b6040518082815260200191505060405180910390f35b8060008190555050565b600080549050905600a165627a7a7230582061b7676067d537e410bb704932a9984739a959416170ea17bda192ac1218d2790029",
       tx_input:
         "0x608060405234801561001057600080fd5b5060df8061001f6000396000f3006080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806360fe47b114604e5780636d4ce63c146078575b600080fd5b348015605957600080fd5b5060766004803603810190808035906020019092919050505060a0565b005b348015608357600080fd5b50608a60aa565b6040518082815260200191505060405180910390f35b8060008190555050565b600080549050905600a165627a7a7230582061b7676067d537e410bb704932a9984739a959416170ea17bda192ac1218d2790029",
-      name: sequence("SimpleStorage"),
+      name: "SimpleStorage",
       source_code: """
       pragma solidity ^0.4.24;
 
@@ -632,7 +639,7 @@ defmodule Explorer.Factory do
 
   def token_factory do
     %Token{
-      name: sequence("Infinite Token"),
+      name: "Infinite Token",
       symbol: "IT",
       total_supply: 1_000_000_000,
       decimals: 18,
@@ -640,6 +647,10 @@ defmodule Explorer.Factory do
       type: "ERC-20",
       cataloged: true
     }
+  end
+
+  def unique_token_factory do
+    Map.replace(token_factory(), :name, sequence("Infinite Token"))
   end
 
   def token_transfer_log_factory do
@@ -807,6 +818,10 @@ defmodule Explorer.Factory do
       abi: contract_code_info.abi,
       contract_code_md5: bytecode_md5
     }
+  end
+
+  def unique_smart_contract_factory do
+    Map.replace(smart_contract_factory(), :name, sequence("SimpleStorage"))
   end
 
   def decompiled_smart_contract_factory do
